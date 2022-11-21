@@ -11,6 +11,7 @@
 
 #include "../models/Vishay10K.hpp"
 #include "../models/TDK10K.hpp"
+#include "../models/TDKB57500M.hpp"
 
 #define USER_LED_PORT           GPIO_PRT20
 #define USER_LED_PIN            1
@@ -58,15 +59,27 @@ int main(void)
   
     /* Test Vishay 10K */
     Vishay10K ntc_vishay10k = Vishay10K();
-    adc_value = 10000;
+    adc_value = 3000;
     value = ntc_vishay10k.GetTemperature(adc_value);
     if(value == 0) return TEST_FAILED;
 
     /* Test TDK 10K */
     TDK10K ntc_tdk10k = TDK10K();
-    adc_value = 10000;
+    adc_value = 3000;
     value = ntc_tdk10k.GetTemperature(adc_value);
     if(value == 0) return TEST_FAILED;
+    
+    /* Test TDK 10K */
+    TDKB57500M ntc_TDKB57500M = TDKB57500M();
+    adc_value = 3000;
+    value = ntc_TDKB57500M.GetTemperature(adc_value);
+    if(value == 0) return TEST_FAILED;
+    
+    /* Hints */
+    // Test short circuit to VDD adc_value > 4095
+    // Test short circuit to GND adc_value = 0
+    // Test rntc resistance out of table
+    // Random test??
   
     return TEST_SUCCESSFUL;
 }
