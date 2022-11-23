@@ -13,6 +13,10 @@ extern "C" {
 #endif
 #define MCU_STM32H750xx     3
 
+#include <stdint.h>
+
+uint32_t scale_color(uint32_t color_, float scaler_);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
